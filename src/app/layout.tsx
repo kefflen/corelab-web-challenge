@@ -1,4 +1,4 @@
-import { cn } from '@/utils'
+import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Header } from './components/Header'
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, 'bg-background')}>
-        <Header className='mb-6'/>
+        <Header className="mb-6" />
         {children}
       </body>
     </html>
