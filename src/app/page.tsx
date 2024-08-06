@@ -33,7 +33,7 @@ export default function Home() {
       </section>
       <section>
         <h1 className="text-xl font-semibold mb-2">Favoritos</h1>
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(430px,1fr))]">
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
           {NotesMock.map((note) => (
             <NoteCard key={note.id} note={note} />
           ))}
@@ -41,7 +41,7 @@ export default function Home() {
       </section>
       <section>
         <h1 className="text-xl font-semibold mb-2">Outros</h1>
-        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(430px,1fr))]">
+        <div className="grid gap-5 grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
           {NotesMock.map((note) => (
             <NoteCard key={note.id} note={note} />
           ))}
