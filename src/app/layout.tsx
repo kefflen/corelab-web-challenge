@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, 'bg-background')}>
-        <Header />
+        <Header className='mb-6'/>
         {children}
       </body>
     </html>
