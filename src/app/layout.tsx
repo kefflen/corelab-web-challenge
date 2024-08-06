@@ -1,26 +1,27 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/utils"
+import { cn } from '@/utils'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import { Header } from './components/Header'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Corelab",
-  description: "Notes",
-};
+  title: 'Corelab',
+  description: 'Notes',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body className={cn(
-        inter.className,
-        'bg-background'
-      )}>{children}</body>
+      <body className={cn(inter.className, 'bg-background')}>
+        <Header />
+        {children}
+      </body>
     </html>
-  );
+  )
 }
