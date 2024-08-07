@@ -1,6 +1,10 @@
 'use client'
 
-import { deleteNote, updateNote } from '@/app/actions/NotesApi'
+import {
+  deleteNote as deleteNoteAction,
+  updateNote as updateNoteAction,
+} from '@/app/actions/NotesApi'
+import { useNotesContext } from '@/app/hooks/useNotesContext'
 import {
   Popover,
   PopoverContent,
@@ -23,7 +27,7 @@ export const NoteCard = ({ note }: NoteCardProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
   const [editingNote, setEditingNote] = useState(note)
-
+  const { updateNote, deleteNote } = useNotesContext()
   useEffect(() => {
     setEditingNote(note)
   }, [note])
@@ -31,7 +35,7 @@ export const NoteCard = ({ note }: NoteCardProps) => {
   const handleIsEditModeChange = () => {
     setIsEditMode((prev) => {
       if (prev) {
-        updateNote(editingNote)
+        updateNoteAction(editingNote)
       }
       return !prev
     })
@@ -39,22 +43,25 @@ export const NoteCard = ({ note }: NoteCardProps) => {
 
   const handleChangeColor = (color: string) => {
     setEditingNote((prev) => ({ ...prev, color }))
-    updateNote({
+    updateNoteAction({
       id: editingNote.id,
       color,
     })
   }
 
-  const handleRemoveNote = () => {
+  const handleRemoveNote = async () => {
+    await deleteNoteAction(editingNote.id)
     deleteNote(editingNote.id)
   }
 
-  const changeIsFavorite = (isFavorite: boolean) => {
+  const changeIsFavorite = async (isFavorite: boolean) => {
     setEditingNote((prev) => ({ ...prev, isFavorite }))
-    updateNote({
+    const body = await updateNoteAction({
       id: editingNote.id,
       isFavorite,
     })
+
+    updateNote(body)
   }
 
   return (

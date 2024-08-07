@@ -3,19 +3,26 @@ import { createNote } from '@/app/actions/NotesApi'
 import { FormEvent, useState } from 'react'
 import { Card } from '../Card'
 import { FavoriteToggleIcon } from '../FavoriteToggleIcon'
+import { Note } from '@/types/Note'
+import { useNotesContext } from '@/app/hooks/useNotesContext'
+
+
 
 export const CreateNoteCard = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
   const [isFavorite, setIsFavorite] = useState(false)
+  const { addNote } = useNotesContext()
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    await createNote({
+    const body = await createNote({
       content,
       isFavorite,
       title,
     })
+
+    addNote(body)
 
     setTitle('')
     setContent('')

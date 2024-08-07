@@ -1,30 +1,21 @@
 'use client'
 import { Note } from '@/types/Note'
-import { useEffect, useState } from 'react'
-import { getNotes } from './actions/NotesApi'
 import { CreateNoteCard } from './components/CreateNoteCard'
 import { NotesGrid } from './components/NotesGrid'
+import { useNotesContext } from './hooks/useNotesContext'
 
 export default function Home() {
-  const [othersNotes, setOthersNotes] = useState<Note[]>([])
-  const [favoriteNotes, setFavoriteNotes] = useState<Note[]>([])
+  const { notes } = useNotesContext()
 
-  useEffect(() => {
-    getNotes().then((notes) => {
-      let favoriteNotes: Note[] = []
-      let othersNotes: Note[] = []
-
-      for (const note of notes) {
-        if (note.isFavorite) {
-          favoriteNotes.push(note)
-        } else {
-          othersNotes.push(note)
-        }
-      }
-      setFavoriteNotes(favoriteNotes)
-      setOthersNotes(othersNotes)
-    })
-  }, [])
+  let favoriteNotes: Note[] = []
+  let othersNotes: Note[] = []
+  for (const note of notes) {
+    if (note.isFavorite) {
+      favoriteNotes.push(note)
+    } else {
+      othersNotes.push(note)
+    }
+  }
 
   return (
     <main className="flex flex-col gap-10 px-4 pb-20">
