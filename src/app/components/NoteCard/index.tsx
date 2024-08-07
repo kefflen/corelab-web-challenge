@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Popover,
   PopoverContent,
@@ -7,13 +9,18 @@ import { cn } from '@/lib/utils'
 import { colors } from '@/models/colors'
 import { Note } from '@/types/Note'
 import Image from 'next/image'
+import { useState } from 'react'
 import { Card } from '../Card'
+import { ToogleIconButton } from './_components/ToogleIconButton'
 
 type NoteCardProps = {
   note: Note
 }
 
 export const NoteCard = ({ note }: NoteCardProps) => {
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+  const [isEditMode, setIsEditMode] = useState(false)
+
   return (
     <Card
       className={cn('h-[440px] rounded-2xl flex flex-col')}
@@ -30,25 +37,37 @@ export const NoteCard = ({ note }: NoteCardProps) => {
         />
       </div>
       <hr className={cn('border-background', note.color && 'border-white')} />
-      <div className="px-5 py-2 flex-1 overflow-auto break-words">{note.content}</div>
+      <div className="px-5 py-2 flex-1 overflow-auto break-words">
+        {note.content}
+      </div>
       <div className="px-5 py-4 flex justify-between w-full">
         <div className="flex gap-4">
-          <Image
-            alt="edit icon"
-            src="/edit.svg"
-            height={20}
-            width={20}
-            className="cursor-pointer"
-          />
-          <Popover>
+          <ToogleIconButton
+            isActive={isEditMode}
+            onClick={() => setIsEditMode((prev) => !prev)}
+          >
+            <Image
+              alt="edit icon"
+              src="/edit.svg"
+              height={20}
+              width={20}
+              className="cursor-pointer"
+            />
+          </ToogleIconButton>
+          <Popover
+            onOpenChange={(isOpen) => setIsPopoverOpen(isOpen)}
+            open={isPopoverOpen}
+          >
             <PopoverTrigger>
-              <Image
-                alt="tint icon"
-                src="/tint.svg"
-                height={20}
-                width={20}
-                className="cursor-pointer"
-              />
+              <ToogleIconButton isActive={isPopoverOpen}>
+                <Image
+                  alt="tint icon"
+                  src="/tint.svg"
+                  height={20}
+                  width={20}
+                  className="cursor-pointer"
+                />
+              </ToogleIconButton>
             </PopoverTrigger>
             <PopoverContent align="start" className="flex gap-1">
               {Object.entries(colors).map(([color, value]) => (
