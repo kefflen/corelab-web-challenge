@@ -21,7 +21,7 @@ export const createNote = async (note: Omit<Note, 'id'>) => {
   return response.json()
 }
 
-export const updateNote = async (note: Note) => {
+export const updateNote = async (note: Partial<Note> & { id: string }) => {
   const response = await fetch(`${apiBaseUrl}/notes/${note.id}`, {
     method: 'PUT',
     headers: {
