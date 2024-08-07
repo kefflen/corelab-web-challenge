@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import 'react-circular-progressbar/dist/styles.css'
 import { Header } from './components/Header'
 import './globals.css'
 import { Providers } from './providers'

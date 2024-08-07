@@ -1,7 +1,6 @@
 'use server'
 
 import { Note } from "@/types/Note"
-import { revalidatePath } from "next/cache"
 
 const apiBaseUrl = 'http://localhost:8080'
 

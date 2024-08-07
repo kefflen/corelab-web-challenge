@@ -1,5 +1,4 @@
 'use client'
-
 import {
   deleteNote as deleteNoteAction,
   updateNote as updateNoteAction,
@@ -13,10 +12,13 @@ import {
 import { cn } from '@/lib/utils'
 import { colors } from '@/models/colors'
 import { Note } from '@/types/Note'
+import axios from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { MdAttachFile } from 'react-icons/md'
 import { Card } from '../Card'
 import { FavoriteToggleIcon } from '../FavoriteToggleIcon'
+import { UploadBoxZone } from '../UploadBoxZone'
 import { ToogleIconButton } from './_components/ToogleIconButton'
 
 type NoteCardProps = {
@@ -64,6 +66,17 @@ export const NoteCard = ({ note }: NoteCardProps) => {
     updateNote(body)
   }
 
+  const handleOnUploadFile = async (file: File) => {
+    const formData = new FormData()
+    formData.append('file', file)
+    const { data } = await axios.put<Note>(
+      `http://localhost:8080/notes/${editingNote.id}/add-file`,
+      formData
+    )
+
+    updateNote(data)
+  }
+
   return (
     <Card
       className={cn('h-[440px] rounded-2xl flex flex-col')}
@@ -94,6 +107,19 @@ export const NoteCard = ({ note }: NoteCardProps) => {
         readOnly={!isEditMode}
         className="flex-1 p-5 outline-none bg-transparent resize-none"
       />
+      {editingNote.fileUrl && (
+        <div className="px-5 py-2 flex gap-1">
+          <MdAttachFile />
+          <a
+            target="_blank"
+            href={editingNote.fileUrl}
+            className="text-sm underline"
+          >
+            {editingNote.fileUrl.split('/').pop()}
+          </a>
+        </div>
+      )}
+      <UploadBoxZone handleOnUploadFile={handleOnUploadFile} className="mx-5" />
       <div className="px-5 py-4 flex justify-between w-full">
         <div className="flex gap-4">
           <ToogleIconButton
