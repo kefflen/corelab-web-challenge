@@ -10,7 +10,9 @@ export const FavoriteToggleIcon = ({
   setIsFavorite,
 }: FavoriteToggleProps) => {
   return (
-    <button type="button" onClick={() => setIsFavorite(!isFavorite)}>
+    <button type="button" onClick={() => setIsFavorite(!isFavorite)}
+      className='flex-shrink-0'
+    >
       {isFavorite ? (
         <Image
           alt="favorite icon"

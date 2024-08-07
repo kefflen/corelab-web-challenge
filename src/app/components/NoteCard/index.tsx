@@ -69,14 +69,14 @@ export const NoteCard = ({ note }: NoteCardProps) => {
       className={cn('h-[440px] rounded-2xl flex flex-col')}
       styles={editingNote.color ? { backgroundColor: editingNote.color } : {}}
     >
-      <div className="flex px-5">
+      <div className="flex justify-between px-5">
         <input
           value={editingNote.title}
           onChange={(e) =>
             setEditingNote((prev) => ({ ...prev, title: e.target.value }))
           }
           readOnly={!isEditMode}
-          className="text-xl font-bold py-2 flex-1 outline-none bg-transparent"
+          className="text-xl font-bold py-2 outline-none bg-transparent w-full"
         />
         <FavoriteToggleIcon
           isFavorite={editingNote.isFavorite}
