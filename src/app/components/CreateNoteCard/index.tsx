@@ -30,7 +30,7 @@ export const CreateNoteCard = () => {
   }
 
   return (
-    <Card className="sm:w-[530px] h-[100px]">
+    <Card className="sm:w-[530px] h-[120px]">
       <form onSubmit={onSubmit} className="flex flex-col gap-4">
         <div>
           <div className="flex px-5">
@@ -47,7 +47,7 @@ export const CreateNoteCard = () => {
             />
           </div>
           <hr />
-          <div className="flex px-5">
+          <div className="flex px-5 py-2">
             <textarea
               placeholder="Criar nota..."
               value={content}
