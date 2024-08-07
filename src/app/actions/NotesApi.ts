@@ -4,9 +4,8 @@ import { Note } from "@/types/Note"
 
 const apiBaseUrl = 'http://localhost:8080'
 
-export const getNotes = async () => {
+export const getNotes = async (): Promise<Note[]> => {
   const response = await fetch(`${apiBaseUrl}/notes`)
-  
   return response.json()
 }
 
