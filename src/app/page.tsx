@@ -5,7 +5,7 @@ import { NotesGrid } from './components/NotesGrid'
 import { useNotesContext } from './hooks/useNotesContext'
 
 export default function Home() {
-  const { notes } = useNotesContext()
+  const { searchResults: notes } = useNotesContext()
 
   let favoriteNotes: Note[] = []
   let othersNotes: Note[] = []
