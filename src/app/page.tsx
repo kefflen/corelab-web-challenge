@@ -1,4 +1,6 @@
 import { Note } from '@/types/Note'
+import { useEffect } from 'react'
+import { getNotes } from './actions/NotesApi'
 import { CreateNoteCard } from './components/CreateNoteCard'
 import { NoteCard } from './components/NoteCard'
 

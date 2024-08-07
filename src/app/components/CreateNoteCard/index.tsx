@@ -1,4 +1,5 @@
 'use client'
+import { createNote } from '@/app/actions/NotesApi'
 import Image from 'next/image'
 import { FormEvent, useState } from 'react'
 import { Card } from '../Card'
@@ -8,13 +9,23 @@ export const CreateNoteCard = () => {
   const [content, setContent] = useState('')
   const [isFavorite, setIsFavorite] = useState(false)
 
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    await createNote({
+      content,
+      isFavorite,
+      title,
+    })
+
+    setTitle('')
+    setContent('')
+    setIsFavorite(false)
+  }
+
   return (
     <Card className="sm:w-[530px] h-[100px]">
       <form
-        onSubmit={(e: FormEvent) => {
-          e.preventDefault()
-          console.log({ title, content, isFavorite })
-        }}
+        onSubmit={onSubmit}
       >
         <div className="flex px-5">
           <input
@@ -30,9 +41,7 @@ export const CreateNoteCard = () => {
               src="/star.svg"
               height={20}
               width={20}
-              className={`cursor-pointer ${
-                isFavorite ? 'bg-yellow-500' : ''
-              }`}
+              className={`cursor-pointer ${isFavorite ? 'bg-yellow-500' : ''}`}
             />
           </button>
         </div>
