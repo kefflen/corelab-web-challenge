@@ -30,7 +30,7 @@ export const NoteCard = ({ note }: NoteCardProps) => {
         />
       </div>
       <hr className={cn('border-background', note.color && 'border-white')} />
-      <div className="px-5 py-2 flex-1">{note.content}</div>
+      <div className="px-5 py-2 flex-1 overflow-auto break-words">{note.content}</div>
       <div className="px-5 py-4 flex justify-between w-full">
         <div className="flex gap-4">
           <Image
