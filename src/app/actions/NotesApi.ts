@@ -1,11 +1,17 @@
 'use server'
 
 import { Note } from "@/types/Note"
+import { revalidatePath } from "next/cache"
 
 const apiBaseUrl = 'http://localhost:8080'
 
 export const getNotes = async (): Promise<Note[]> => {
   const response = await fetch(`${apiBaseUrl}/notes`)
+
+  if (!response.ok) {
+    throw new Error('Erro ao criar nota')
+  }
+
   return response.json()
 }
 
@@ -17,6 +23,10 @@ export const createNote = async (note: Omit<Note, 'id'>) => {
     },
     body: JSON.stringify(note),
   })
+
+  if (!response.ok) {
+    throw new Error('Erro ao criar nota')
+  }
 
   return response.json()
 }
@@ -30,6 +40,10 @@ export const updateNote = async (note: Partial<Note> & { id: string }) => {
     body: JSON.stringify(note),
   })
 
+  if (!response.ok) {
+    throw new Error('Erro ao criar nota')
+  }
+
   return response.json()
 }
 
@@ -37,6 +51,10 @@ export const deleteNote = async (id: string) => {
   const response = await fetch(`${apiBaseUrl}/notes/${id}`, {
     method: 'DELETE',
   })
+
+  if (!response.ok) {
+    throw new Error('Erro ao criar nota')
+  }
 
   return response.json()
 }
