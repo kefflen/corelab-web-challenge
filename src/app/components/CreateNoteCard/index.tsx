@@ -1,8 +1,8 @@
 'use client'
 import { createNote } from '@/app/actions/NotesApi'
-import Image from 'next/image'
 import { FormEvent, useState } from 'react'
 import { Card } from '../Card'
+import { FavoriteToggleIcon } from '../FavoriteToggleIcon'
 
 export const CreateNoteCard = () => {
   const [title, setTitle] = useState('')
@@ -24,9 +24,7 @@ export const CreateNoteCard = () => {
 
   return (
     <Card className="sm:w-[530px] h-[100px]">
-      <form
-        onSubmit={onSubmit}
-      >
+      <form onSubmit={onSubmit}>
         <div className="flex px-5">
           <input
             type="text"
@@ -35,15 +33,10 @@ export const CreateNoteCard = () => {
             onChange={(e) => setTitle(e.target.value)}
             className="flex-1 text-xl font-bold py-2 outline-none"
           />
-          <button type="button" onClick={() => setIsFavorite(!isFavorite)}>
-            <Image
-              alt="favorite icon"
-              src="/star.svg"
-              height={20}
-              width={20}
-              className={`cursor-pointer ${isFavorite ? 'bg-yellow-500' : ''}`}
-            />
-          </button>
+          <FavoriteToggleIcon
+            isFavorite={isFavorite}
+            setIsFavorite={setIsFavorite}
+          />
         </div>
         <hr />
         <div className="flex px-5">

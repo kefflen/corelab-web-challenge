@@ -12,6 +12,7 @@ import { Note } from '@/types/Note'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { Card } from '../Card'
+import { FavoriteToggleIcon } from '../FavoriteToggleIcon'
 import { ToogleIconButton } from './_components/ToogleIconButton'
 
 type NoteCardProps = {
@@ -66,15 +67,10 @@ export const NoteCard = ({ note }: NoteCardProps) => {
           readOnly={!isEditMode}
           className="text-xl font-bold py-2 flex-1 outline-none bg-transparent"
         />
-        <button onClick={() => changeIsFavorite(!editingNote.isFavorite)}>
-          <Image
-            alt="favorite icon"
-            src="/star.svg"
-            height={20}
-            width={20}
-            className="cursor-pointer"
-          />
-        </button>
+        <FavoriteToggleIcon
+          isFavorite={editingNote.isFavorite}
+          setIsFavorite={changeIsFavorite}
+        />
       </div>
       <hr
         className={cn('border-background', editingNote.color && 'border-white')}
