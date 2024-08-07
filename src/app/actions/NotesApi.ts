@@ -55,6 +55,4 @@ export const deleteNote = async (id: string) => {
   if (!response.ok) {
     throw new Error('Erro ao criar nota')
   }
-
-  return response.json()
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { updateNote } from '@/app/actions/NotesApi'
+import { deleteNote, updateNote } from '@/app/actions/NotesApi'
 import {
   Popover,
   PopoverContent,
@@ -43,6 +43,10 @@ export const NoteCard = ({ note }: NoteCardProps) => {
       id: editingNote.id,
       color,
     })
+  }
+
+  const handleRemoveNote = () => {
+    deleteNote(editingNote.id)
   }
 
   const changeIsFavorite = (isFavorite: boolean) => {
@@ -124,13 +128,15 @@ export const NoteCard = ({ note }: NoteCardProps) => {
             </PopoverContent>
           </Popover>
         </div>
-        <Image
-          alt="delete icon"
-          src="/x.svg"
-          height={20}
-          width={20}
-          className="cursor-pointer"
-        />
+        <button onClick={handleRemoveNote}>
+          <Image
+            alt="delete icon"
+            src="/x.svg"
+            height={20}
+            width={20}
+            className="cursor-pointer"
+          />
+        </button>
       </div>
     </Card>
   )
