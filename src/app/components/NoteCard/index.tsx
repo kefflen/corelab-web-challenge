@@ -4,13 +4,7 @@ import {
   updateNote as updateNoteAction,
 } from '@/app/actions/NotesApi'
 import { useNotesContext } from '@/app/hooks/useNotesContext'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { colors } from '@/models/colors'
 import { Note } from '@/types/Note'
 import axios from 'axios'
 import Image from 'next/image'
@@ -19,6 +13,7 @@ import { MdAttachFile } from 'react-icons/md'
 import { Card } from '../Card'
 import { FavoriteToggleIcon } from '../FavoriteToggleIcon'
 import { UploadBoxZone } from '../UploadBoxZone'
+import { ColorPopover } from './_components/ColorPopover'
 import { ToogleIconButton } from './_components/ToogleIconButton'
 
 type NoteCardProps = {
@@ -134,32 +129,11 @@ export const NoteCard = ({ note }: NoteCardProps) => {
               className="cursor-pointer"
             />
           </ToogleIconButton>
-          <Popover
-            onOpenChange={(isOpen) => setIsPopoverOpen(isOpen)}
-            open={isPopoverOpen}
-          >
-            <PopoverTrigger>
-              <ToogleIconButton isActive={isPopoverOpen}>
-                <Image
-                  alt="tint icon"
-                  src="/tint.svg"
-                  height={20}
-                  width={20}
-                  className="cursor-pointer"
-                />
-              </ToogleIconButton>
-            </PopoverTrigger>
-            <PopoverContent align="start" className="flex gap-1">
-              {Object.entries(colors).map(([color, value]) => (
-                <button
-                  key={value}
-                  className="h-5 w-5 rounded-full"
-                  style={{ backgroundColor: value }}
-                  onClick={() => handleChangeColor(value)}
-                ></button>
-              ))}
-            </PopoverContent>
-          </Popover>
+          <ColorPopover
+            handleChangeColor={handleChangeColor}
+            isPopoverOpen={isPopoverOpen}
+            setIsPopoverOpen={setIsPopoverOpen}
+          />
         </div>
         <button onClick={handleRemoveNote}>
           <Image
