@@ -9,11 +9,11 @@ import { Note } from '@/types/Note'
 import axios from 'axios'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { MdAttachFile } from 'react-icons/md'
 import { Card } from '../Card'
 import { FavoriteToggleIcon } from '../FavoriteToggleIcon'
 import { UploadBoxZone } from '../UploadBoxZone'
 import { ColorPopover } from './_components/ColorPopover'
+import { DownloadButton } from './_components/DownloadButton'
 import { ToogleIconButton } from './_components/ToogleIconButton'
 
 type NoteCardProps = {
@@ -105,8 +105,8 @@ export const NoteCard = ({ note }: NoteCardProps) => {
         className="flex-1 p-5 outline-none bg-transparent resize-none"
       />
       {editingNote.fileUrl && (
-        <div className="px-5 py-2 flex gap-1">
-          <MdAttachFile />
+        <div className="px-5 py-2 flex items-center gap-1">
+          <DownloadButton url={editingNote.fileUrl} />
           <a
             target="_blank"
             href={editingNote.fileUrl}
