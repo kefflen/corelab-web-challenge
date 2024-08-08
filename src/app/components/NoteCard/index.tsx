@@ -64,8 +64,10 @@ export const NoteCard = ({ note }: NoteCardProps) => {
   const handleOnUploadFile = async (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'
+
     const { data } = await axios.put<Note>(
-      `http://localhost:8080/notes/${editingNote.id}/add-file`,
+      `${baseUrl}/notes/${editingNote.id}/add-file`,
       formData
     )
 
