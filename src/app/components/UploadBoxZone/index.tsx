@@ -16,7 +16,7 @@ export const UploadBoxZone = ({
           <div
             {...getRootProps()}
             className={cn(
-              'flex items-center justify-center border-2 border-neutral-800/20 border-dashed rounded-md p-4',
+              'flex items-center justify-center border-2 border-neutral-800/20 border-dashed rounded-md p-4 cursor-pointer',
               isDragActive && 'border-neutral-800/50',
               isDragReject && 'border-red-600',
               className
