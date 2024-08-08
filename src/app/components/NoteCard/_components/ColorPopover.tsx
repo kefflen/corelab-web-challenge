@@ -34,11 +34,14 @@ export const ColorPopover = ({
           />
         </ToogleIconButton>
       </PopoverTrigger>
-      <PopoverContent align="start" className="flex gap-1">
+      <PopoverContent
+        align="start"
+        className="flex gap-1 max-w-[225px] flex-wrap sm:max-w-fit sm:flex-nowrap"
+      >
         {Object.entries(colors).map(([color, value]) => (
           <button
             key={value}
-            className="h-5 w-5 rounded-full"
+            className="h-7 w-7 sm:h-5 sm:w-5 rounded-full"
             style={{ backgroundColor: value }}
             onClick={() => handleChangeColor(value)}
           ></button>
